@@ -8,7 +8,7 @@ export default function Header() {
             <Link to='/'>
                 <h1 className='font-bold text-lg sm:text-2xl flex flex-wrap'>
                     <span className='text-slate-500 '>Xillow</span>
-                    <span className='text-slate-800'>Estates</span>
+                    <span className='text-slate-800'>Estate</span>
                 </h1>
             </Link>
             <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
