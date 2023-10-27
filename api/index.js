@@ -1,8 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
-mongoose.connect("mongodb+srv://ngumartin:ngumartin@xillowestate.f5jq7i1.mongodb.net/xillow-estate?retryWrites=true&w=majority")
-
+mongoose
+    .connect(process.env.MONGO)
+    .then(() => {
+        console.log('Connected to MongoDB!')
+    })
 const app = express();
 
 app.listen(3000, () => {
