@@ -14,8 +14,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
-}, { timestamps: true }); 
+    },
+    avatar: {
+        type: String,
+        default: "https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+    },
+    }, 
+        { timestamps: true }
+); 
 
 const User = mongoose.model('User', userSchema);
 
