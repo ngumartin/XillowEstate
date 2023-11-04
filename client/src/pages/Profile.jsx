@@ -12,6 +12,10 @@ export default function Profile() {
         <input type="text" placeholder="password" id="password" className="border p-3 rounded-lg" />
         <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-80 disabled:opacity-65">update</button>
       </form>
+      <div className="flex justify-between mt-5">
+        <span className="text-red-700 cursor-pointer border p-3 rounded-lg">Delete Account</span>
+        <span className="text-red-700 cursor-pointer border p-3 rounded-lg">Sign Out</span>
+      </div>
     </div>
   )
 };
