@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
-import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from "../firebase";
 export default function Profile() {
   const fileRef = useRef(null);
@@ -8,17 +8,10 @@ export default function Profile() {
   const [ file, setFile ] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
-  console.log(filePerc);
-  console.log(file);
-
-  // Firebase storage
-  // allow read;
-  //     allow write: if
-  //     request.resources.size < 2 * 1024 * 1024 &&
-  //     request.resources.contentType.matches('images/.*')
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
-    if(file) {
+    if (file) {
       handleFileUpload(file);
     }
   }, [file]);
@@ -32,12 +25,19 @@ export default function Profile() {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setFilePerc(Math.round(progress));
-      });
+      },
       (error) => {
         setFileUploadError(true);
-      }  
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+          setFormData({ ...formData, avatar: downloadURL })
+        );
+      }
+    );
   };
 
   return (
@@ -51,11 +51,28 @@ export default function Profile() {
           hidden accept="image/*" 
         />
         <img 
-          onClick={()=>fileRef.current.click()} 
-          src={currentUser.avatar} 
+          onClick={() => fileRef.current.click()} 
+          src={formData.avatar || currentUser.avatar} 
           alt="profile" 
-          className="rounded-full h-26 w-26 object-cover cursor-pointer self-center mt-2" 
+          className="rounded-full h-28 w-28 object-cover cursor-pointer self-center mt-2" 
         />
+        <p className="text-sm self-center">
+          {fileUploadError ? (
+            <span className="text-red-700">
+              Error Image Upload
+            (image must be less than 2 mb)</span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span className="text-slate-700">{`Uploading ${filePerc}%`}
+              </span>
+            ) : filePerc === 100 ? (
+                <span className="text-green-700">
+                  Image Successfully Uploaded!
+                </span>
+              ) : ( 
+                ""
+              )
+          }
+        </p>
         <input 
           type="text" 
           placeholder="username" 
