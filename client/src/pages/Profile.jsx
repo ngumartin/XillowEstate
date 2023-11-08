@@ -9,6 +9,7 @@ export default function Profile() {
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
+  console.log(formData)
 
   useEffect(() => {
     if (file) {
@@ -38,6 +39,10 @@ export default function Profile() {
         );
       }
     );
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value })
   };
 
   return (
@@ -77,19 +82,24 @@ export default function Profile() {
           type="text" 
           placeholder="username" 
           id="username" 
+          defaultValue={currentUser.username}
           className="border p-3 rounded-lg" 
+          onChange={handleChange}
         />
         <input 
           type="email" 
           placeholder="email" 
           id="email" 
+          defaultValue={currentUser.email}
           className="border p-3 rounded-lg" 
+          onChange={handleChange}
         />
         <input 
           type="text" 
           placeholder="password" 
           id="password" 
           className="border p-3 rounded-lg" 
+          onChange={handleChange}
         />
         <button 
           className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-80 disabled:opacity-65">
