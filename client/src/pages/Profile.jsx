@@ -6,7 +6,7 @@ import { updateUserStart, updateUserSuccess, updateUserFailure } from "../redux/
 import { useDispatch } from "react-redux";
 export default function Profile() {
   const fileRef = useRef(null);
-  const {currentUser} = useSelector((state) => state.user);
+  const {currentUser, loading, error} = useSelector((state) => state.user);
   const [ file, setFile ] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -62,8 +62,9 @@ export default function Profile() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateUserFailure(data.message))
-        return
+        return;
       };
+      dispatch(updateUserFailure(error.message));
     } catch (error) {
       dispatch(updateUserFailure(error.message));
     }
@@ -119,15 +120,15 @@ export default function Profile() {
           onChange={handleChange}
         />
         <input 
-          type="text" 
+          type="password" 
           placeholder="password" 
           id="password" 
           className="border p-3 rounded-lg" 
           onChange={handleChange}
         />
-        <button 
+        <button disabled={loading}
           className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-80 disabled:opacity-65">
-            update
+            { loading ? 'Loading...' : 'Update' }
         </button>
       </form>
       <div className="flex justify-between mt-5">
