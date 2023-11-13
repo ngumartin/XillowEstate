@@ -19,7 +19,11 @@ export default function OAuth() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name: result.user.displayName, email: result.user.email, photo: result.user.photoURL }),
+                body: JSON.stringify({ 
+                    name: result.user.displayName, 
+                    email: result.user.email, 
+                    photo: result.user.photoURL 
+                }),
             })
             const data = await res.json();
             dispatch(signInSuccess(data));
@@ -29,8 +33,12 @@ export default function OAuth() {
         }
     };
     return (
-    <button onClick={handleGoogleClick} type='button' className='bg-cyan-700 text-white p-3 rounded-lg uppercase hover:opacity-80'>
-        Sign In with google
-    </button>
+        <button 
+            onClick={handleGoogleClick} 
+            type='button' 
+            className='bg-cyan-700 text-white p-3 rounded-lg uppercase hover:opacity-80'
+        >
+            Sign In with google
+        </button>
     )
 };
