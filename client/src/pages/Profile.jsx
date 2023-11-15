@@ -1,8 +1,20 @@
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { 
+  getDownloadURL, 
+  getStorage, 
+  ref, 
+  uploadBytesResumable 
+} from 'firebase/storage';
 import { app } from "../firebase";
-import { updateUserStart, updateUserSuccess, updateUserFailure } from "../redux/user/userSlice";
+import { 
+  updateUserStart, 
+  updateUserSuccess, 
+  updateUserFailure, 
+  deleteUserFailure, 
+  deleteUserStart, 
+  deleteUserSuccess 
+} from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 export default function Profile() {
   const fileRef = useRef(null);
@@ -50,8 +62,8 @@ export default function Profile() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try { 
+    e.preventDefault();
+    try {
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: 'POST',
@@ -62,14 +74,31 @@ export default function Profile() {
       });
       const data = await res.json();
       if (data.success === false) {
-        dispatch(updateUserFailure(data.message))
+        dispatch(updateUserFailure(data.message));
         return;
-      };
+      }
 
-      dispatch(updateUserFailure(error.message));
+      dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
     }
   };
 
