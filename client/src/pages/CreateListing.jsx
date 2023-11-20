@@ -118,8 +118,8 @@ export default function CreateListing() {
                         <input className='p-3 border border-gray-400 rounded w-full' type="file" id='images' accept='image/*' multiple />
                         <button className='p-3 font-semibold text-green-800 border border-green-800 rounded uppercase hover:bg-gray-300 disabled:opacity-80'>Upload</button>
                     </div>
+                    <button className='p-3 bg-slate-600 text-white rounded-lg uppercase hover:opacity-80 disabled:opacity-40'>Create Listing</button>
                 </div>
-
             </form>
         </main>
     );
