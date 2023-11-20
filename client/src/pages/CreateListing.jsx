@@ -6,7 +6,7 @@ export default function CreateListing() {
             <h1 className='text-3xl font-semibold text-center my-7'>
                 Create a Listing
             </h1>
-            <form className='flex flex-col sm:flex-row'>
+            <form className='flex flex-col sm:flex-row gap-6'>
 
                 <div className='flex flex-col gap-4 flex-1'>
                     <input type="text" placeholder='Name' className='border p-3 rounded-lg' id='name' maxLength='62' minLength='10' required />
@@ -108,6 +108,18 @@ export default function CreateListing() {
                         </div>
                     </div>
                 </div>
+
+                <div className='flex flex-col flex-1 gap-4'>
+                    <p className='font-semibold'>
+                        Images:
+                        <span className='font-normal text-gray-600 ml-2'>The first image will be the cover (max 6)</span>
+                    </p>
+                    <div className='flex gap-4'>
+                        <input className='p-3 border border-gray-400 rounded w-full' type="file" id='images' accept='image/*' multiple />
+                        <button className='p-3 font-semibold text-green-800 border border-green-800 rounded uppercase hover:bg-gray-300 disabled:opacity-80'>Upload</button>
+                    </div>
+                </div>
+
             </form>
         </main>
     );
