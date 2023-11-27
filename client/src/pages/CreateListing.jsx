@@ -180,11 +180,19 @@ export default function CreateListing() {
                         <button 
                             type="button" 
                             onClick={handleImageSubmit} 
-                            className='p-3 font-semibold text-green-800 border border-green-800 rounded uppercase hover:bg-gray-300 disabled:opacity-80'>
+                            className='p-3 font-semibold text-green-800 border border-green-800 rounded-lg uppercase hover:bg-gray-200 disabled:opacity-80'>
                                 Upload
                             </button>
                     </div>
                     <p className='text-red-700'>{imageUploadError && imageUploadError}</p>
+                    {
+                        formData.imageUrls.length > 0 && formData.imageUrls.map((url) => (
+                            <div className='flex justify-between p-3 border items-center'>
+                                <img src={url} alt="listing image" className='w-20 h-20 object-contain rounded-lg' />
+                                <button className='border border-red-700 p-3 text-red-700 rounded-lg uppercase hover:bg-gray-200'>Delete</button>
+                            </div>
+                        ))
+                    }
                     <button className='p-3 bg-slate-600 text-white rounded-lg uppercase hover:opacity-80 disabled:opacity-40'>Create Listing</button>
                 </div>
             </form>
