@@ -1,8 +1,8 @@
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { app } from '../firebase';
-import {useSelector} from 'react-redux';
 
 export default function CreateListing() {
     const {currentUser} = useSelector(state => state.user);
@@ -119,6 +119,8 @@ export default function CreateListing() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if(formData.imageUrls.length < 1) return setError('You must upload at least one image');
+            if(+formData.regularPrice < +formData.discountPrice) return setError('Discount price must be lower than regular price');
             setLoading(true)
             setError(false)
             const res = await fetch('/api/listing/create', {
@@ -274,22 +276,25 @@ export default function CreateListing() {
                                 <span className='text-sm'>($ / Month)</span>
                             </div>
                         </div>
-                        <div className='flex items-center gap-2'>
-                            <input
-                                type="number" 
-                                id='discountPrice' 
-                                min='1' 
-                                max='100000000' 
-                                required 
-                                className='p-3 border border-gray-300 rounded-lg'
-                                onChange={handleChange}
-                                value={formData.discountPrice}
-                            />
-                            <div className='flex flex-col items-center'>
-                                <p>Discounted Price</p>
-                                <span className='text-sm'>($ / Month)</span>
+                        
+                        {formData.offer && (
+                            <div className='flex items-center gap-2'>
+                                <input
+                                    type="number" 
+                                    id='discountPrice' 
+                                    min='1' 
+                                    max='100000000' 
+                                    required 
+                                    className='p-3 border border-gray-300 rounded-lg'
+                                    onChange={handleChange}
+                                    value={formData.discountPrice}
+                                />
+                                <div className='flex flex-col items-center'>
+                                    <p>Discounted Price</p>
+                                    <span className='text-sm'>($ / Month)</span>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
 
