@@ -1,11 +1,13 @@
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { app } from '../firebase';
 
 export default function CreateListing() {
     const {currentUser} = useSelector(state => state.user);
+    const navigate = useNavigate();
     const [files, setFiles] = useState([]);
     const [formData, setFormData] = useState({
         imageUrls: [],
@@ -138,6 +140,7 @@ export default function CreateListing() {
             if (data.success === false) {
                 setError(data.message)
             }
+            navigate(`/listing/${data._id}`)
         } catch (error) {
             setError(error.message)
             setLoading(false)
@@ -264,7 +267,7 @@ export default function CreateListing() {
                             <input
                                 type="number" 
                                 id='regularPrice' 
-                                min='1' 
+                                min='0' 
                                 max='100000000' 
                                 required 
                                 className='p-3 border border-gray-300 rounded-lg'
@@ -282,7 +285,7 @@ export default function CreateListing() {
                                 <input
                                     type="number" 
                                     id='discountPrice' 
-                                    min='1' 
+                                    min='0' 
                                     max='100000000' 
                                     required 
                                     className='p-3 border border-gray-300 rounded-lg'
@@ -341,7 +344,7 @@ export default function CreateListing() {
                             </div>
                         ))
                     }
-                    <button className='p-3 bg-slate-600 text-white rounded-lg uppercase hover:opacity-80 disabled:opacity-40'>
+                    <button disabled={loading || uploading} className='p-3 bg-slate-600 text-white rounded-lg uppercase hover:opacity-80 disabled:opacity-40'>
                         {loading ? 'Creating...' : 'Create Listing'}
                     </button>
                     {error && <p className='text-red-700 text-sm'>{error}</p>}
