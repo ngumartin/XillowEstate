@@ -15,7 +15,7 @@ export default function Listing() {
     const [error, setError] = useState(false);
     const [copied, setCopied] = useState(false);
     const params = useParams();
-    const { currentUser } = useSelector((state) => state.user);
+    const { currentUser } = useSelector((state) => state.user.currentUser);
     useEffect(() => {
         const fetchListing = async () => {
 
@@ -53,7 +53,7 @@ export default function Listing() {
                         {listing.imageUrls.map((url) => (
                             <SwiperSlide key={url}>
                                 <div
-                                    className='h-[550px]'
+                                    className='h-[600px]'
                                     style={{
                                         background: `url(${url}) center no-repeat`,
                                         backgroundSize: 'cover'
@@ -135,7 +135,7 @@ export default function Listing() {
                             Contact landlord
                         </button>
                     )}
-                    {/* {contact && <Contact listing={listing} />} */}
+                    {/* {contact && <Contact listing={listing} />}  */}
                     </div>
                 </div>
             )};
