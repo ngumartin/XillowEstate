@@ -1,10 +1,12 @@
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import userRouter from './routes/user.route.js';
+
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
-import cookieParser from 'cookie-parser';
+import userRouter from './routes/user.route.js';
+
 dotenv.config();
 
 mongoose
