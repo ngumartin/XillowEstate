@@ -29,7 +29,7 @@ export default function Contact({listing}) {
                 <p>
                     Contact {' '}
                     <span className='font-semibold'>{landlord.username}</span>{' '}
-                        for {' '} 
+                        for {' '}
                     <span className='font-semibold'>{listing.name.toLowerCase()}</span>
                 </p>
                 <textarea 
