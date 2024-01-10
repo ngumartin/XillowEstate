@@ -7,10 +7,10 @@ import CreateListing from "./pages/CreateListing";
 import Home from "./pages/Home";
 import Listing from "./pages/Listing";
 import Profile from "./pages/Profile";
+import Search from "./pages/Search";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import UpdateListing from "./pages/UpdateListing";
-import Search from "./pages/Search";
 
 export default function App() {
   return (
