@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import ListingItem from '../components/ListingItem';
+
 export default function Search() {
     const navigate = useNavigate();
     const [sidebardata, setSidebardata] = useState({
@@ -16,6 +18,7 @@ export default function Search() {
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
     const [showMore, setShowMore] = useState(false);
+    console.log(listings);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
@@ -100,7 +103,7 @@ export default function Search() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDDefault()
+        e.preventDefault()
         const urlParams = new URLSearchParams()
         urlParams.set('searchTerm', sidebardata.searchTerm)
         urlParams.set('type', sidebardata.type)
@@ -205,6 +208,11 @@ export default function Search() {
 
         <div className=''>
             <h1 className='text-3xl font-semibold border-b p-3 mt-5 text-slate-700'>Listing results:</h1>
+            <div className=''>
+                {!loading && listings.length === 0 && (
+                    <p className='text-xl text-slate-700'>No listing found!</p>
+                )}
+            </div>
         </div>
     </div>
     )
