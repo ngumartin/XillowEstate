@@ -8,7 +8,7 @@ export default function ListingItem({ listing }) {
                 <img
                     src={
                         listing.imageUrls[0] ||
-                        'https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Sales_Blog/real-estate-business-compressor.jpg?width=595&height=400&name=real-estate-business-compressor.jpg'
+                        'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Freal%2520estate%2F&psig=AOvVaw1EbWisZ8XhTsFK8rD51Krq&ust=1705695959650000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCLDX8uTi54MDFQAAAAAdAAAAABAD'
                     }
                     alt='listing cover'
                     className='h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300'
@@ -18,12 +18,12 @@ export default function ListingItem({ listing }) {
                         {listing.name}
                     </p>
                     <div className='flex items-center gap-1'>
-                        <MdLocationOn className='h-4 w-4 text-green-700' />
+                        <MdLocationOn className='h-6 w-6 text-green-700' />
                         <p className='text-sm text-gray-600 truncate w-full'>
                             {listing.address}
                         </p>
                     </div>
-                    <p className='text-sm text-gray-600 line-clamp-2'>
+                    <p className='text-sm text-gray-600 line-clamp-3'>
                         {listing.description}
                     </p>
                     <p className='text-slate-500 mt-2 font-semibold '>
