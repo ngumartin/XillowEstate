@@ -147,26 +147,7 @@ export default function Search() {
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
                         <label className='font-semibold'>Type:</label>
-                        {/* <div className='flex gap-2'>
-                            <input
-                                type='checkbox'
-                                id='all'
-                                className='w-5'
-                                onChange={handleChange}
-                                checked={sidebardata.type === 'all'}
-                            />
-                            <span>Rent & Sale</span>
-                        </div>
-                        <div className='flex gap-2'>
-                            <input
-                                type='checkbox'
-                                id='rent'
-                                className='w-5'
-                                onChange={handleChange}
-                                checked={sidebardata.type === 'rent'}
-                            />
-                            <span>Rent</span>
-                        </div> */}
+                        
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
